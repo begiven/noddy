@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		20C85BC81C30F7280008AA9A /* libpython3.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C85BC71C30F7280008AA9A /* libpython3.5.dylib */; };
 		20C85BCB1C30F7650008AA9A /* noddymodule.c in Sources */ = {isa = PBXBuildFile; fileRef = 20C85BCA1C30F7650008AA9A /* noddymodule.c */; };
+		20C85BD51C3242C00008AA9A /* libpython3.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C85BC71C30F7280008AA9A /* libpython3.5.dylib */; };
+		20C85BD71C3243130008AA9A /* shoddymodule.c in Sources */ = {isa = PBXBuildFile; fileRef = 20C85BD61C3243130008AA9A /* shoddymodule.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		20C85BBF1C30F6B70008AA9A /* noddy.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = noddy.so; sourceTree = BUILT_PRODUCTS_DIR; };
 		20C85BC71C30F7280008AA9A /* libpython3.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpython3.5.dylib; path = /usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework/Versions/3.5/lib/libpython3.5.dylib; sourceTree = "<absolute>"; };
 		20C85BCA1C30F7650008AA9A /* noddymodule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = noddymodule.c; sourceTree = "<group>"; };
+		20C85BD01C32427E0008AA9A /* shoddy.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = shoddy.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		20C85BD61C3243130008AA9A /* shoddymodule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shoddymodule.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +30,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20C85BCD1C32427E0008AA9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20C85BD51C3242C00008AA9A /* libpython3.5.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -33,6 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				20C85BC61C30F6C00008AA9A /* noddy */,
+				20C85BD41C3242A50008AA9A /* shoddy */,
 				20C85BC91C30F72E0008AA9A /* Frameworks */,
 				20C85BC01C30F6B70008AA9A /* Products */,
 			);
@@ -42,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				20C85BBF1C30F6B70008AA9A /* noddy.so */,
+				20C85BD01C32427E0008AA9A /* shoddy.so */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,10 +76,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		20C85BD41C3242A50008AA9A /* shoddy */ = {
+			isa = PBXGroup;
+			children = (
+				20C85BD61C3243130008AA9A /* shoddymodule.c */,
+			);
+			name = shoddy;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
 		20C85BBD1C30F6B70008AA9A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20C85BCE1C32427E0008AA9A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -92,6 +121,23 @@
 			productReference = 20C85BBF1C30F6B70008AA9A /* noddy.so */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		20C85BCF1C32427E0008AA9A /* shoddy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20C85BD31C32427F0008AA9A /* Build configuration list for PBXNativeTarget "shoddy" */;
+			buildPhases = (
+				20C85BCC1C32427E0008AA9A /* Sources */,
+				20C85BCD1C32427E0008AA9A /* Frameworks */,
+				20C85BCE1C32427E0008AA9A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shoddy;
+			productName = shoddy;
+			productReference = 20C85BD01C32427E0008AA9A /* shoddy.so */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -102,6 +148,9 @@
 				ORGANIZATIONNAME = lattesir;
 				TargetAttributes = {
 					20C85BBE1C30F6B70008AA9A = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					20C85BCF1C32427E0008AA9A = {
 						CreatedOnToolsVersion = 7.2;
 					};
 				};
@@ -119,6 +168,7 @@
 			projectRoot = "";
 			targets = (
 				20C85BBE1C30F6B70008AA9A /* noddy */,
+				20C85BCF1C32427E0008AA9A /* shoddy */,
 			);
 		};
 /* End PBXProject section */
@@ -129,6 +179,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				20C85BCB1C30F7650008AA9A /* noddymodule.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20C85BCC1C32427E0008AA9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20C85BD71C3243130008AA9A /* shoddymodule.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +304,38 @@
 			};
 			name = Release;
 		};
+		20C85BD11C32427F0008AA9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = "";
+				HEADER_SEARCH_PATHS = /usr/local/Frameworks/Python.framework/Versions/3.5/Headers;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework/Versions/3.5/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		20C85BD21C32427F0008AA9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = "";
+				HEADER_SEARCH_PATHS = /usr/local/Frameworks/Python.framework/Versions/3.5/Headers;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework/Versions/3.5/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -263,6 +353,15 @@
 			buildConfigurations = (
 				20C85BC41C30F6B70008AA9A /* Debug */,
 				20C85BC51C30F6B70008AA9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20C85BD31C32427F0008AA9A /* Build configuration list for PBXNativeTarget "shoddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20C85BD11C32427F0008AA9A /* Debug */,
+				20C85BD21C32427F0008AA9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
