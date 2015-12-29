@@ -16,14 +16,6 @@ typedef struct {
     int number;
 } Noddy;
 
-static void
-Noddy_dealloc(Noddy *self)
-{
-    Py_XDECREF(self->first);
-    Py_XDECREF(self->last);
-    Py_TYPE(self)->tp_free((PyObject *)self);
-}
-
 static PyObject *
 Noddy_new(PyTypeObject *type, PyObject *args, PyObject *kwargs)
 {
@@ -146,6 +138,36 @@ static PyGetSetDef Noddy_getseters[] = {
     {NULL}
 };
 
+/* 
+ * To support cyclic garbage collection, Noddy need to fill two slots and
+ * set a class flag that enables these slots
+ */
+static int
+Noddy_traverse(Noddy *self, visitproc visit, void *arg)
+{
+    /*
+     * NOTE: To utilize Py_VISIT macro, the arguments must be named visit and arg
+     */
+    Py_VISIT(self->first);
+    Py_VISIT(self->last);
+    return 0;
+}
+
+static int
+Noddy_clear(Noddy *self)
+{
+    Py_CLEAR(self->first);
+    Py_CLEAR(self->last);
+    return 0;
+}
+
+static void
+Noddy_dealloc(Noddy *self)
+{
+    Noddy_clear(self);
+    Py_TYPE(self)->tp_free((PyObject *)self);
+}
+
 static PyObject *
 Noddy_name(Noddy *self)
 {
@@ -190,10 +212,11 @@ static PyTypeObject noddy_NoddyType = {
     0,                         /* tp_setattro */
     0,                         /* tp_as_buffer */
     Py_TPFLAGS_DEFAULT |
-        Py_TPFLAGS_BASETYPE,   /* tp_flags */
+        Py_TPFLAGS_BASETYPE |
+        Py_TPFLAGS_HAVE_GC,    /* tp_flags */
     "Noddy objects",           /* tp_doc */
-    0,                         /* tp_traverse */
-    0,                         /* tp_clear */
+    (traverseproc)Noddy_traverse,   /* tp_traverse */
+    (inquiry)Noddy_clear,           /* tp_clear */
     0,                         /* tp_richcompare */
     0,                         /* tp_weaklistoffset */
     0,                         /* tp_iter */
