@@ -73,6 +73,26 @@ Noddy_init(Noddy *self, PyObject *args, PyObject *kwargs)
     return 0;
 }
 
+static PyObject *
+Noddy_richcompare(Noddy *noddy1, Noddy *noddy2, int op)
+{
+    PyObject *result;
+    int c = 0;
+    
+    switch (op) {
+    case Py_LT: c = noddy1->number <  noddy2->number; break;
+    case Py_LE: c = noddy1->number <= noddy2->number; break;
+    case Py_EQ: c = noddy1->number == noddy2->number; break;
+    case Py_NE: c = noddy1->number != noddy2->number; break;
+    case Py_GT: c = noddy1->number >  noddy2->number; break;
+    case Py_GE: c = noddy1->number >= noddy2->number; break;
+    }
+    
+    result = c ? Py_True : Py_False;
+    Py_INCREF(result);
+    return result;
+}
+
 static PyMemberDef Noddy_members[] = {
     {"number", T_INT, offsetof(Noddy, number), 0, "noddy number"},
     {NULL}
@@ -217,7 +237,7 @@ static PyTypeObject noddy_NoddyType = {
     "Noddy objects",           /* tp_doc */
     (traverseproc)Noddy_traverse,   /* tp_traverse */
     (inquiry)Noddy_clear,           /* tp_clear */
-    0,                         /* tp_richcompare */
+    (richcmpfunc)Noddy_richcompare, /* tp_richcompare */
     0,                         /* tp_weaklistoffset */
     0,                         /* tp_iter */
     0,                         /* tp_iternext */
